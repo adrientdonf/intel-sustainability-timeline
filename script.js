@@ -4,47 +4,6 @@
 
 'use strict';
 
-/* ── 1. WORD SCRAMBLE HERO ───────────────────────────────── */
-(function initScramble() {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%';
-  const words = ['heroWord1', 'heroWord2', 'heroWord3'];
-  const targets = ['Sustainability', 'Through', 'The\u00a0Ages'];
-
-  function scramble(el, target, delay) {
-    const orig = el.textContent;
-    let frame = 0;
-    const totalFrames = 28;
-    setTimeout(() => {
-      const interval = setInterval(() => {
-        frame++;
-        const progress = frame / totalFrames;
-        const revealCount = Math.floor(target.length * Math.min(progress * 1.4, 1));
-        let result = '';
-        for (let i = 0; i < target.length; i++) {
-          if (target[i] === ' ' || target[i] === '\u00a0') {
-            result += target[i];
-          } else if (i < revealCount) {
-            result += target[i];
-          } else {
-            result += chars[Math.floor(Math.random() * chars.length)];
-          }
-        }
-        el.textContent = result;
-        if (frame >= totalFrames) {
-          clearInterval(interval);
-          el.textContent = target;
-        }
-      }, 40);
-    }, delay);
-  }
-
-  window.addEventListener('load', () => {
-    words.forEach((id, i) => {
-      const el = document.getElementById(id);
-      if (el) scramble(el, targets[i], 400 + i * 260);
-    });
-  });
-})();
 
 /* ── 2. HERO MOUSE PARALLAX ──────────────────────────────── */
 (function initParallax() {
